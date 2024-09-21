@@ -1,3 +1,4 @@
+import os
 import discord
 from discord.ext import commands
 
@@ -26,4 +27,4 @@ async def on_message(message):
         await message.channel.send("かきくけこ")
 
 # Botのトークンを入れる
-bot.run('')
+bot.run('DISTOKEN')
