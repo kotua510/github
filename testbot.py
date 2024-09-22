@@ -4,29 +4,27 @@ from discord.ext import commands
 
 # インテントを有効化する
 intents = discord.Intents.default()
-intents.message_content = True  # メッセージ関連のイベントを有効にする
+intents.message_content = True
 
 # Botのコマンドプレフィックスを設定
 bot = commands.Bot(command_prefix="!", intents=intents)
 
-# Botが準備完了したときの処理
 @bot.event
 async def on_ready():
     print(f'Logged in as {bot.user}')
 
-# メッセージが送信されたときの処理
 @bot.event
 async def on_message(message):
-    # ボット自身のメッセージは無視
     if message.author == bot.user:
         return
-
-    # ユーザーが「あいうえお」と送信した場合
     if message.content == "あいうえお":
         await message.channel.send("かきくけこ")
 
 # 環境変数からBotのトークンを取得
 bot_token = os.getenv('DISTOKEN')
+
+# 環境変数からPORTを取得
+port = int(os.getenv('PORT', 5000))  # デフォルトポートは5000
 
 # Botのトークンで実行
 if bot_token:
