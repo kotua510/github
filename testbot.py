@@ -9,7 +9,6 @@ intents.message_content = True  # メッセージ関連のイベントを有効�
 # Botのコマンドプレフィックスを設定
 bot = commands.Bot(command_prefix="!", intents=intents)
 
-
 # Botが準備完了したときの処理
 @bot.event
 async def on_ready():
@@ -26,5 +25,12 @@ async def on_message(message):
     if message.content == "あいうえお":
         await message.channel.send("かきくけこ")
 
-# Botのトークンを入れる
-bot.run('DISTOKEN')
+# 環境変数からBotのトークンを取得
+bot_token = os.getenv('DISTOKEN')
+
+# Botのトークンで実行
+if bot_token:
+    bot.run(bot_token)
+else:
+    print("環境変数 'DISTOKEN' が設定されていません。")
+
